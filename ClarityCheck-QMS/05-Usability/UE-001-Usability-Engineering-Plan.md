@@ -458,28 +458,3 @@ Usability engineering and risk management are tightly coupled for ClarityCheck. 
 | OI-03 | Define confederate test scenario for crisis pathway (T-03) — confirm technical approach for pre-setting PHQ-9 item 9 in test environment | PRRC | Before summative testing |
 | OI-04 | Clinical reviewer to review crisis screen and results screen content as part of VAL-04 (linked to CE-001 OI-01) | PRRC | Before release |
 | OI-05 | FE-001 to be completed post-prototype and findings fed back into RM-002 if new use-related hazards identified | PRRC | After prototype |
-
----
-
-UE-001 is now complete. The full QMS document status:
-
-| Document | Status |
-|---|---|
-| DDR-001, DDR-002 | ✅ Complete |
-| RG-001 Annex A | ✅ Complete |
-| DC-002 Design Inputs | ✅ Complete |
-| DC-003 Design Outputs | ✅ Complete |
-| DC-004 V&V Plan | ✅ Complete |
-| RM-001 Risk Management Plan | ✅ Complete |
-| RM-002 Risk Assessment FMEA | ✅ Complete |
-| RM-003 Risk Control Measures | ✅ Complete |
-| LB-001 Instructions for Use | ✅ Complete |
-| CE-001 Clinical Evaluation Plan | ✅ Complete |
-| UE-001 Usability Engineering Plan | ✅ Complete |
-| RM-004 Residual Risk Evaluation | Pending CE-002 |
-| CE-002 Literature Review | Not started |
-| CE-003 Clinical Evaluation Report | Pending CE-002 |
-| UE-004 Summary of Usability Engineering | Pending UE-003 |
-| QM-001 Quality Manual | Not started |
-
-**CE-002** is now the last major unblocking document — it feeds RM-004 and CE-003. Ready to write it?

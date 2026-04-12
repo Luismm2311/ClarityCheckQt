@@ -339,19 +339,3 @@ ClarityCheck is a Software as a Medical Device (SaMD) regulated under EU MDR 201
 | OI-06 | Clinical reviewer sign-off required before finalisation | PRRC | Linked to CE-001 OI-01 |
 
 ---
-
-LB-001 is now the reference document for all user-facing language and risk control messaging. Several RC items from RM-002 are now implemented here — RC-01 through RC-16, RC-24 through RC-32 all have direct IFU expression.
-
-The QMS is taking solid shape. Outstanding core documents are:
-
-| Document | Status |
-|---|---|
-| RM-003 Risk Control Measures | Not started |
-| RM-004 Residual Risk Evaluation | Not started — needs CE-002 first |
-| CE-002 Literature Review | Not started |
-| CE-003 Clinical Evaluation Report | Not started — needs CE-002 |
-| UE-001 Usability Engineering Plan | Not started |
-| DC-003 Design Outputs | Not started |
-| DC-004 Verification & Validation Plan | Not started |
-
-Where next?

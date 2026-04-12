@@ -772,16 +772,3 @@ Full verification evidence for each RC is recorded in **DC-004 Verification and 
 | OI-04 | QM-004 required to implement RC-23 | PRRC | QMS milestone |
 
 ---
-
-RM-003 is now complete. The risk management file is structurally solid:
-
-| Document | Status |
-|---|---|
-| RM-001 Risk Management Plan | ✅ Complete |
-| RM-002 Risk Assessment FMEA | ✅ Complete |
-| RM-003 Risk Control Measures | ✅ Complete |
-| RM-004 Residual Risk Evaluation | Pending — needs CE-002 first |
-
-The critical dependency for RM-004 is the clinical benefit evidence from CE-002. The critical dependency for most pending RCs is **DC-003 Design Outputs**, which locks instrument text, scoring tables, and results document design.
-
-**DC-003** is the most unblocking next step. Ready to write it?

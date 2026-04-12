@@ -569,3 +569,13 @@ Per MDR labeling requirements and DC-002 FR-24:
 |---|---|---|---|
 | Author / PRRC | | 2026-04-10 | |
 
+---
+
+### 13. Open Items
+
+| ID | Item | Owner | Due |
+|---|---|---|---|
+| OI-01 | Confirm crisis helpline references for §5.4 and §5.7 (linked to RM-002 OI-01) | PRRC | Before release |
+| OI-02 | Complete manufacturer name, PRRC name, UDI in §10 | PRRC | Before release |
+| OI-03 | Verify ASRS Part A item text against original Harvard/NYU published instrument character by character before DC-003 is signed off | PRRC | Before design freeze |
+| OI-04 | Confirm PHQ-9 functional impairment item inclusion does not affect IP conditions | PRRC | Before implementation |

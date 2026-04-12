@@ -1,23 +1,3 @@
-Good data. I now have a clear picture of what's accessible. Let me give you the honest answer before writing.
-
----
-
-## Open Access Feasibility Assessment
-
-| Paper | Status |
-|---|---|
-| **Kessler 2005** (ASRS original validation) | PubMed abstract free; full PDF available via ResearchGate ✅ |
-| **Kessler 2007** (ASRS health plan validity) | **Full text on PMC** — PMC2044504 ✅ |
-| **Adler 2006** (ASRS pilot validation) | PubMed abstract only; ResearchGate PDF available ✅ |
-| **Kroenke 2001** (PHQ-9 validation) | **Full text on PMC** — PMC1495268 ✅ |
-| **Spitzer 2006** (GAD-7 validation) | PDF freely available via multiple institutional hosts ✅ |
-| **Löwe 2008** (GAD-7 general population) | Available via ResearchGate ✅ |
-| Supporting PMC papers | Numerous open access ✅ |
-
-**Verdict: Yes — CE-002 is fully achievable using only freely accessible sources.** The core validation papers for all three instruments are accessible without a paywall. We note access route for each source as a QMS good practice.
-
----
-
 ## CE-002 Literature Review — ClarityCheck v1.0
 
 **Document ID:** CE-002
@@ -432,17 +412,3 @@ The following gaps are noted and shall be addressed in CE-003 as limitations:
 | OI-04 | Check for any post-2024 systematic reviews of ASRS v1.1 performance — update if material | PRRC | Before CE-003 |
 
 ---
-
-CE-002 is now complete using entirely freely accessible sources. Every source is either on PMC or available via freely accessible PDFs.
-
-**Updated QMS Status:**
-
-| Document | Status |
-|---|---|
-| CE-001 Clinical Evaluation Plan | ✅ Complete |
-| CE-002 Literature Review | ✅ Complete |
-| RM-004 Residual Risk Evaluation | Now unblocked |
-| CE-003 Clinical Evaluation Report | Now unblocked |
-| QM-001 Quality Manual | Not started |
-
-**RM-004** is now unblocked — it takes the performance data from CE-002 and formally closes the benefit-risk analysis. Or we could go straight to **CE-003** which synthesises everything into the final clinical evaluation report for submission. Which first?

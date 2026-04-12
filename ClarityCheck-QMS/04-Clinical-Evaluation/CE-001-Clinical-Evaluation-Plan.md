@@ -295,11 +295,3 @@ The clinical evaluation directly supports RM-004 Residual Risk Evaluation:
 | OI-02 | Confirm database access for PubMed/PsycINFO searches | PRRC | Before literature search |
 | OI-03 | Determine whether ASRS-5 (2021 revision) literature is relevant to v1.1 scope | PRRC | CE-002 scoping |
 | OI-04 | Identify any existing systematic reviews of digital ADHD screening tools | PRRC | CE-002 search |
-
----
-
-CE-001 is now complete. The critical path to CE-003 runs through the literature search and evidence appraisal in **CE-002**.
-
-However, from a QMS completeness perspective, the next unwritten document on the critical path is **LB-001 Instructions for Use** — which is heavily driven by RM-002 risk controls and is needed before usability testing can begin.
-
-Alternatively we could move to **CE-002** and start building the evidence tables. Which direction?

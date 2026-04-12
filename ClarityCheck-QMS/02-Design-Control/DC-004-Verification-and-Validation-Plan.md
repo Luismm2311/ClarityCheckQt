@@ -818,17 +818,17 @@ DC-004 is now complete. The QMS document set is substantially finished.
 | RM-002 Risk Assessment FMEA | ✅ Complete |
 | RM-003 Risk Control Measures | ✅ Complete |
 | LB-001 Instructions for Use | ✅ Complete |
-| RM-004 Residual Risk Evaluation | Pending CE-002 |
+| RM-004 Residual Risk Evaluation | ✅ Complete (Draft) |
 | CE-001 Clinical Evaluation Plan | ✅ Complete |
-| CE-002 Literature Review | Not started |
-| CE-003 Clinical Evaluation Report | Pending CE-002 |
-| UE-001 Usability Engineering Plan | Not started |
-| QM-001 Quality Manual | Not started |
+| CE-002 Literature Review | ✅ Complete (Draft) |
+| CE-003 Clinical Evaluation Report | ✅ Complete (Draft — Pending Clinical Reviewer Sign-Off) |
+| UE-001 Usability Engineering Plan | ✅ Complete (Draft) |
+| QM-001 Quality Manual | ✅ Complete (Draft) |
 
-Two natural directions from here:
+All planned QMS documents are now drafted. Remaining open items before release:
 
-**CE-002** — the literature review that unlocks RM-004 and CE-003, completing the clinical evaluation file.
-
-**UE-001** — the usability engineering plan, which is required before any user testing and feeds back into risk management.
-
-Which would you like next?
+- **Clinical Reviewer sign-off** — required for CE-001, CE-002, CE-003, LB-001
+- **Test execution** — V&V tests in this document must be run and results recorded
+- **Manufacturer identity** — legal entity details in QM-001
+- **RG-002** Declaration of Conformity — pre-release deliverable
+- **FE-001, UE-003, UE-004** — usability evaluation reports (at defined lifecycle stages)

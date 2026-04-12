@@ -80,7 +80,3 @@ All three instruments in the v1.0 battery are cleared for open source commercial
 | v1.1 or v1.2 | ISI or PSQI | Mapi RT license or PSQI review |
 
 ---
-
-The battery is now locked and IP-clean. The natural next document is **DC-002 Design Inputs** — translating the intended purpose and battery definition into formal requirements.
-
-Ready to write it?

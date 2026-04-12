@@ -85,22 +85,3 @@ Use of the instrument requires permission from Charles M. Morin, Ph.D. at Univer
 | ASRS Part A | ✅ Free with conditions | Attribution + no modifications |
 | ASRS Part B | ⚠️ License required | Contact NYU TOV |
 | ISI | 🔴 Permission required | Contact Mapi Research Trust |
-
----
-
-## Design Decision Required
-
-The ISI is a blocking item. Three options:
-
-**Option 1 — Pursue ISI license**
-Submit to Mapi Research Trust. Document the request and outcome in QMS. If granted, proceed. If refused, fall back to Option 2.
-
-**Option 2 — Replace ISI**
-Substitute with the **Pittsburgh Sleep Quality Index (PSQI)** or the **Epworth Sleepiness Scale**, both of which have cleaner open licensing. PSQI is in the public domain; Epworth is freely available.
-
-**Option 3 — Drop sleep domain from v1.0**
-Document as a design decision. Sleep comorbidity screening becomes a v1.1 design change — which is itself a useful QMS demonstration.
-
----
-
-Which direction do you want to take on the ISI decision?

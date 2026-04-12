@@ -26,9 +26,9 @@ This manual is the primary reference document for internal quality management an
 | Legal entity | [To be completed] |
 | Registered address | [To be completed] |
 | Organisation type | Solo developer — independent software developer |
-| PRRC | mesw |
+| PRRC | [Name — to be completed] |
 | Contact | [To be completed] |
-| Website | mesw.github.io/claritycheck |
+| Website | [To be completed] |
 
 ClarityCheck is developed and maintained by a single individual acting as developer, quality manager, and Person Responsible for Regulatory Compliance (PRRC). The Quality Manual and all associated QMS documentation reflect this organisational structure. Where ISO 13485 references roles or departments, these are fulfilled by the sole developer unless an external party is explicitly named.
 
@@ -638,3 +638,17 @@ QM-001 is the capstone document. The ClarityCheck v1.0 QMS is now substantively 
 | DDR-002 | ASRS Part A only | ✅ Complete |
 
 ---
+
+## What Remains Before Release
+
+| Activity | Document | Dependency |
+|---|---|---|
+| Clinical reviewer engagement and CE-003 sign-off | CE-003 | Highest priority |
+| Confirm crisis helpline references | RM-002, LB-001, DC-003 | Before release |
+| Formative evaluation (heuristic + cognitive walkthrough) | FE-001 | After prototype |
+| Summative usability testing (n=5) | UE-003, UE-004 | After implementation |
+| DC-004 test execution | DC-004 results columns | After implementation |
+| PM-001, PM-002, PM-003 drafting | Post-market file | Before release |
+| RG-002 Declaration of Conformity | Release document | Last step |
+| EUDAMED registration and UDI assignment | MDR obligation | Before market placement |
+| NYU TOV license for ASRS Part B | DDR-002 v1.1 | Before v1.1 |

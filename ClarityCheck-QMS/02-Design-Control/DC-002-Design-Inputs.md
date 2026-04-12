@@ -192,3 +192,12 @@ ClarityCheck v1.0 is a self-administered SaMD intended to support adults (18+) w
 | Author / PRRC | | 2026-04-10 | |
 | Design Review | | | |
 
+---
+
+### 11. Open Items
+
+| ID | Item | Owner | Due |
+|---|---|---|---|
+| OI-01 | Confirm crisis helpline reference for target deployment region(s) | PRRC | Before CE-001 |
+| OI-02 | Define PDF output format spec (FR-17) | Design | DC-003 |
+| OI-03 | Confirm Flesch-Kincaid target achievable for all interpretive text (NFR-05) | Design | Usability plan |

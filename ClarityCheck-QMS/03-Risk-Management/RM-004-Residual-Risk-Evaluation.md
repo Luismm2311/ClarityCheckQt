@@ -515,36 +515,3 @@ I confirm that:
 | OI-02 | Execute DC-004 verification tests and record results | PRRC | Before release |
 | OI-03 | Obtain clinical reviewer sign-off on CE-003 | PRRC | Before release |
 | OI-04 | Complete PRRC formal signatures above upon completion of OI-01–03 | PRRC | Release milestone |
-
----
-
-The risk management file is now complete.
-
-## Risk Management File — Final Status
-
-| Document | Status |
-|---|---|
-| RM-001 Risk Management Plan | ✅ Complete |
-| RM-002 Risk Assessment FMEA | ✅ Complete |
-| RM-003 Risk Control Measures | ✅ Complete |
-| RM-004 Residual Risk Evaluation | ✅ Complete |
-
-The full QMS document status is now:
-
-| Document | Status |
-|---|---|
-| DDR-001, DDR-002 | ✅ |
-| RG-001 Annex A IP Clearance | ✅ |
-| DC-002 Design Inputs | ✅ |
-| DC-003 Design Outputs | ✅ |
-| DC-004 V&V Plan | ✅ |
-| RM-001–004 Risk Management File | ✅ |
-| CE-001 Clinical Evaluation Plan | ✅ |
-| CE-002 Literature Review | ✅ |
-| LB-001 Instructions for Use | ✅ |
-| UE-001 Usability Engineering Plan | ✅ |
-| CE-003 Clinical Evaluation Report | Not started — all inputs now available |
-| QM-001 Quality Manual | Not started |
-| UE-004 Summary of Usability Engineering | Not started — pending UE-003 execution |
-
-**CE-003** is the last major substantive document — it synthesises the entire clinical evidence file into the submission-ready Clinical Evaluation Report. Ready?

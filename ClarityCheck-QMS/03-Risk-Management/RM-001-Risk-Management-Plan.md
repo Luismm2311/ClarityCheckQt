@@ -206,7 +206,3 @@ Post-market risk management triggers are defined in PM-001.
 | OI-03 | Review usability testing outputs for additional use-error hazards | PRRC | After UE-003 |
 
 ---
-
-RM-001 is now the governing document for all subsequent risk activities. The natural next step is **RM-002** — the actual FMEA, working through each hazard category above with probability, severity, controls, and residual risk.
-
-That's the most substantive risk document. Ready to write it?

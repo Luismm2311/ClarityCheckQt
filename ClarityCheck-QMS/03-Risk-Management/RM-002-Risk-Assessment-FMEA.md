@@ -468,12 +468,3 @@ This hazard cannot be reduced to Acceptable in an unsupervised self-assessment c
 | OI-03 | RM-004 benefit-risk analysis to formally accept H5 residual ALARP risk | PRRC | Before release |
 
 ---
-
-RM-002 is now complete as a first-pass FMEA. The next logical documents are either:
-
-- **RM-003 Risk Control Measures** — specifying exact implementation of each RC
-- **CE-001 Clinical Evaluation Plan** — the evidence base that supports the benefit side of the benefit-risk analysis
-
-The CE plan is needed before RM-004 can be completed, so **CE-001 is the critical path item**.
-
-Ready to write it?
