@@ -19,12 +19,12 @@ These must be resolved before v1.0 can be released or signed off.
 |---|---|---|---|---|
 | OIR-01 | Confirm crisis helpline references for target deployment region(s) and propagate to DC-003 §5.4/§5.7, LB-001 §1, RC-10 | DC-002 OI-01, DC-003 OI-01, DC-004 OI-04, RM-001 OI-02, RM-002 OI-01, RM-003 OI-01, RM-004 OI-01, LB-001 OI-04 | PRRC | Before release |
 | OIR-02 | Identify and engage clinical reviewer; obtain sign-off on CE-001, CE-002, CE-003, and LB-001 | CE-001 OI-01, DC-004 OI-03, RM-004 OI-03, UE-001 OI-04, CE-002 OI-03, LB-001 OI-06 | PRRC | Before release |
-| OIR-03 | Select and configure unit test framework; execute all DC-004 V&V tests and record results | DC-004 OI-01 / OI-05, RM-004 OI-02 | PRRC | Before release |
+| OIR-03 | ✅ Qt Test (QTest) selected; DC-004 §4 and §6.1–6.3 updated. Execute all DC-004 V&V tests and record results post-implementation | DC-004 OI-01 / OI-05, RM-004 OI-02 | PRRC | Before release |
 | OIR-04 | Complete manufacturer identity: legal entity name, registered address, and contact details in QM-001 and DC-003 §10 | DC-003 OI-02, LB-001 OI-01/OI-02, QM-001 | PRRC | Before release |
 | OIR-05 | Assign UDI and register in EUDAMED | LB-001 OI-03 | PRRC | Before EUDAMED registration |
 | OIR-06 | Run Flesch-Kincaid readability analysis on LB-001 full text; confirm grade target met (NFR-05) | DC-002 OI-03, DC-004 OI-02, LB-001 OI-05, UE-001 OI-02 | PRRC | Before usability testing |
 | OIR-07 | Verify ASRS Part A item text character-by-character against Harvard/NYU published instrument before design freeze | DC-003 OI-03 | PRRC | Before design freeze |
-| OIR-08 | Confirm PHQ-9 functional impairment item (item 10) inclusion does not affect Pfizer IP conditions | DC-003 OI-04 | PRRC | Before implementation |
+| OIR-08 | Determine whether PHQ-9 item 10 and GAD-7 item 8 (functional impairment follow-ups) add sufficient clinical value to include in v1.0. Both are omitted from the research version — omission is not alteration; scored instruments remain intact. IP is not a blocker. | DC-003 OI-04, DC-004 CT-02, DC-004 CT-03 | PRRC | Before v1.0 design freeze |
 | OIR-09 | Define PDF output format spec for FR-17 (results document) | DC-002 OI-02 | PRRC | DC-003 update |
 
 ---
@@ -83,6 +83,17 @@ These documents are referenced in the QMS but not yet drafted.
 | OIR-21 | PM-001 Post-Market Surveillance Plan | QM-001 | Pre-release |
 | OIR-22 | PM-002 PSUR Template | QM-001 | Pre-release |
 | OIR-23 | PM-003 Complaint Handling Procedure | QM-001 | Pre-release |
+
+---
+
+### Implementation Prerequisites
+
+Items raised during software development planning.
+
+| ID | Item | Source | Owner | Due |
+|---|---|---|---|---|
+| OIR-27 | Record the Emscripten version used for the Wasm build in DC-001 §4 and in CMakeLists.txt (required for build reproducibility per IEC 62304 §8 CM) | DC-001 | PRRC | At first successful Wasm build |
+| OIR-28 | Define and document results document generation approach for FR-17 in the Wasm target (options: styled HTML + browser print dialog via JS bridge; or QtPrintSupport if available in Wasm). Document decision as DDR-003 before Phase 5 implementation. | DC-003 §5.6, DC-002 FR-17 | PRRC | Before Phase 5 implementation |
 
 ---
 

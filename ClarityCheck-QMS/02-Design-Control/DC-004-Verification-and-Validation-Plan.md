@@ -62,7 +62,7 @@ This plan does not cover:
 | Mobile devices | iOS Safari (current), Android Chrome (current) |
 | Minimum viewport | 320px width |
 | Test data | Defined in DC-003 §4 boundary test cases |
-| Unit test framework | [To be selected — Jest recommended for JavaScript] |
+| Unit test framework | Qt Test (QTest), executed via ctest on the desktop build kit. Tests are not run on the Wasm build target. |
 | Tester | Solo Developer / PRRC |
 | Test execution date | [To be completed] |
 
@@ -94,20 +94,20 @@ All unit tests shall be implemented as automated tests in the chosen unit test f
 
 #### 6.1 ASRS Part A Scoring Unit Tests
 
-**Function under test:** `scoreASRS(responses: number[]): { score: number, result: string }`
+**Function under test:** `ScoringEngine::scoreAsrs(const QVector<int> &responses) -> AsrsResult`
 **Reference:** DC-003 §3.2, §4.1
 **Risk control:** RC-17, RC-18, RC-19
 
 | Test ID | Input [r1,r2,r3,r4,r5,r6] | Expected Score | Expected Result | Pass/Fail | Date | Tester |
 |---|---|---|---|---|---|---|
-| UT-ASRS-01 | [0,0,0,0,0,0] | 0 | NEGATIVE_SCREEN | | | |
-| UT-ASRS-02 | [4,4,4,0,0,0] | 3 | NEGATIVE_SCREEN | | | |
-| UT-ASRS-03 | [3,3,3,3,0,0] | 4 | POSITIVE_SCREEN | | | |
-| UT-ASRS-04 | [4,4,4,4,4,4] | 6 | POSITIVE_SCREEN | | | |
-| UT-ASRS-05 | [2,2,2,2,3,3] | 0 | NEGATIVE_SCREEN | | | |
-| UT-ASRS-06 | [3,0,0,0,0,4] | 2 | NEGATIVE_SCREEN | | | |
-| UT-ASRS-07 | [3,3,3,0,4,0] | 4 | POSITIVE_SCREEN | | | |
-| UT-ASRS-08 | [3,3,3,3,3,4] | 5 | POSITIVE_SCREEN | | | |
+| UT-ASRS-01 | [0,0,0,0,0,0] | 0 | NEGATIVE_SCREEN | PASS | 2026-04-12 | PRRC |
+| UT-ASRS-02 | [4,4,4,0,0,0] | 3 | NEGATIVE_SCREEN | PASS | 2026-04-12 | PRRC |
+| UT-ASRS-03 | [3,3,3,3,0,0] | 4 | POSITIVE_SCREEN | PASS | 2026-04-12 | PRRC |
+| UT-ASRS-04 | [4,4,4,4,4,4] | 6 | POSITIVE_SCREEN | PASS | 2026-04-12 | PRRC |
+| UT-ASRS-05 | [2,2,2,2,3,3] | 0 | NEGATIVE_SCREEN | PASS | 2026-04-12 | PRRC |
+| UT-ASRS-06 | [3,0,0,0,0,4] | 2 | NEGATIVE_SCREEN | PASS | 2026-04-12 | PRRC |
+| UT-ASRS-07 | [3,3,3,0,4,0] | 4 | POSITIVE_SCREEN | PASS | 2026-04-12 | PRRC |
+| UT-ASRS-08 | [3,3,3,3,3,4] | 5 | POSITIVE_SCREEN | PASS | 2026-04-12 | PRRC |
 
 **Key boundary notes:**
 - UT-ASRS-05 verifies items 5–6 require value 4 (Very Often); value 3 (Often) does not count
@@ -115,30 +115,30 @@ All unit tests shall be implemented as automated tests in the chosen unit test f
 - UT-ASRS-03 verifies exact threshold at 4 positive items
 
 **Acceptance criterion:** All 8 tests PASS
-**Result summary:** [ ] All pass [ ] Failures — list:
+**Result summary:** [x] All pass — Qt Test 6.8.3, 2026-04-12, Windows 11 x86_64, GCC 13.1.0
 
 ---
 
 #### 6.2 PHQ-9 Scoring Unit Tests
 
-**Function under test:** `scorePHQ9(responses: number[]): { score: number, category: string, crisisFlag: boolean }`
+**Function under test:** `ScoringEngine::scorePhq9(const QVector<int> &responses) -> Phq9Result`
 **Reference:** DC-003 §3.3, §4.2
 **Risk control:** RC-17, RC-19, RC-09
 
 | Test ID | Input [r1..r9] | Exp. Score | Exp. Category | Exp. Crisis Flag | Pass/Fail | Date | Tester |
 |---|---|---|---|---|---|---|---|
-| UT-PHQ-01 | [0,0,0,0,0,0,0,0,0] | 0 | MINIMAL | FALSE | | | |
-| UT-PHQ-02 | [1,1,1,0,0,0,0,0,0] | 3 | MINIMAL | FALSE | | | |
-| UT-PHQ-03 | [1,1,1,1,0,0,0,0,0] | 4 | MINIMAL | FALSE | | | |
-| UT-PHQ-04 | [1,1,1,1,1,0,0,0,0] | 5 | MILD | FALSE | | | |
-| UT-PHQ-05 | [1,1,1,1,1,1,1,1,1] | 9 | MILD | TRUE | | | |
-| UT-PHQ-06 | [2,2,1,1,1,1,1,1,0] | 10 | MODERATE | FALSE | | | |
-| UT-PHQ-07 | [2,2,2,2,2,2,1,1,0] | 14 | MODERATE | FALSE | | | |
-| UT-PHQ-08 | [2,2,2,2,2,2,2,1,0] | 15 | MODERATELY_SEVERE | FALSE | | | |
-| UT-PHQ-09 | [2,2,2,2,2,2,2,2,3] | 19 | MODERATELY_SEVERE | TRUE | | | |
-| UT-PHQ-10 | [3,3,2,2,2,2,2,2,2] | 20 | SEVERE | TRUE | | | |
-| UT-PHQ-11 | [3,3,3,3,3,3,3,3,3] | 27 | SEVERE | TRUE | | | |
-| UT-PHQ-12 | [0,0,0,0,0,0,0,0,1] | 1 | MINIMAL | TRUE | | | |
+| UT-PHQ-01 | [0,0,0,0,0,0,0,0,0] | 0 | MINIMAL | FALSE | PASS | 2026-04-12 | PRRC |
+| UT-PHQ-02 | [1,1,1,0,0,0,0,0,0] | 3 | MINIMAL | FALSE | PASS | 2026-04-12 | PRRC |
+| UT-PHQ-03 | [1,1,1,1,0,0,0,0,0] | 4 | MINIMAL | FALSE | PASS | 2026-04-12 | PRRC |
+| UT-PHQ-04 | [1,1,1,1,1,0,0,0,0] | 5 | MILD | FALSE | PASS | 2026-04-12 | PRRC |
+| UT-PHQ-05 | [1,1,1,1,1,1,1,1,1] | 9 | MILD | TRUE | PASS | 2026-04-12 | PRRC |
+| UT-PHQ-06 | [2,2,1,1,1,1,1,1,0] | 10 | MODERATE | FALSE | PASS | 2026-04-12 | PRRC |
+| UT-PHQ-07 | [2,2,2,2,2,2,1,1,0] | 14 | MODERATE | FALSE | PASS | 2026-04-12 | PRRC |
+| UT-PHQ-08 | [2,2,2,2,2,2,2,1,0] | 15 | MODERATELY_SEVERE | FALSE | PASS | 2026-04-12 | PRRC |
+| UT-PHQ-09 | [2,2,2,2,2,2,2,2,3] | 19 | MODERATELY_SEVERE | TRUE | PASS | 2026-04-12 | PRRC |
+| UT-PHQ-10 | [3,3,2,2,2,2,2,2,2] | 20 | SEVERE | TRUE | PASS | 2026-04-12 | PRRC |
+| UT-PHQ-11 | [3,3,3,3,3,3,3,3,3] | 27 | SEVERE | TRUE | PASS | 2026-04-12 | PRRC |
+| UT-PHQ-12 | [0,0,0,0,0,0,0,0,1] | 1 | MINIMAL | TRUE | PASS | 2026-04-12 | PRRC |
 
 **Key boundary notes:**
 - UT-PHQ-03/04 verify 4/5 boundary (MINIMAL/MILD threshold)
@@ -148,27 +148,27 @@ All unit tests shall be implemented as automated tests in the chosen unit test f
 - UT-PHQ-12 verifies crisis flag triggered by item 9 alone regardless of total score
 
 **Acceptance criterion:** All 12 tests PASS
-**Result summary:** [ ] All pass [ ] Failures — list:
+**Result summary:** [x] All pass — Qt Test 6.8.3, 2026-04-12, Windows 11 x86_64, GCC 13.1.0
 
 ---
 
 #### 6.3 GAD-7 Scoring Unit Tests
 
-**Function under test:** `scoreGAD7(responses: number[]): { score: number, category: string }`
+**Function under test:** `ScoringEngine::scoreGad7(const QVector<int> &responses) -> Gad7Result`
 **Reference:** DC-003 §3.4, §4.3
 **Risk control:** RC-17, RC-19
 
 | Test ID | Input [r1..r7] | Exp. Score | Exp. Category | Pass/Fail | Date | Tester |
 |---|---|---|---|---|---|---|
-| UT-GAD-01 | [0,0,0,0,0,0,0] | 0 | MINIMAL | | | |
-| UT-GAD-02 | [1,1,1,1,0,0,0] | 4 | MINIMAL | | | |
-| UT-GAD-03 | [1,1,1,1,1,0,0] | 5 | MILD | | | |
-| UT-GAD-04 | [1,1,1,1,1,1,1] | 7 | MILD | | | |
-| UT-GAD-05 | [2,2,1,1,1,1,1] | 9 | MILD | | | |
-| UT-GAD-06 | [2,2,2,1,1,1,1] | 10 | MODERATE | | | |
-| UT-GAD-07 | [2,2,2,2,2,2,2] | 14 | MODERATE | | | |
-| UT-GAD-08 | [3,2,2,2,2,2,2] | 15 | SEVERE | | | |
-| UT-GAD-09 | [3,3,3,3,3,3,3] | 21 | SEVERE | | | |
+| UT-GAD-01 | [0,0,0,0,0,0,0] | 0 | MINIMAL | PASS | 2026-04-12 | PRRC |
+| UT-GAD-02 | [1,1,1,1,0,0,0] | 4 | MINIMAL | PASS | 2026-04-12 | PRRC |
+| UT-GAD-03 | [1,1,1,1,1,0,0] | 5 | MILD | PASS | 2026-04-12 | PRRC |
+| UT-GAD-04 | [1,1,1,1,1,1,1] | 7 | MILD | PASS | 2026-04-12 | PRRC |
+| UT-GAD-05 | [2,2,1,1,1,1,1] | 9 | MILD | PASS | 2026-04-12 | PRRC |
+| UT-GAD-06 | [2,2,2,1,1,1,1] | 10 | MODERATE | PASS | 2026-04-12 | PRRC |
+| UT-GAD-07 | [2,2,2,2,2,2,2] | 14 | MODERATE | PASS | 2026-04-12 | PRRC |
+| UT-GAD-08 | [3,2,2,2,2,2,2] | 15 | SEVERE | PASS | 2026-04-12 | PRRC |
+| UT-GAD-09 | [3,3,3,3,3,3,3] | 21 | SEVERE | PASS | 2026-04-12 | PRRC |
 
 **Key boundary notes:**
 - UT-GAD-02/03 verify 4/5 boundary (MINIMAL/MILD)
@@ -176,7 +176,7 @@ All unit tests shall be implemented as automated tests in the chosen unit test f
 - UT-GAD-07/08 verify 14/15 boundary (MODERATE/SEVERE)
 
 **Acceptance criterion:** All 9 tests PASS
-**Result summary:** [ ] All pass [ ] Failures — list:
+**Result summary:** [x] All pass — Qt Test 6.8.3, 2026-04-12, Windows 11 x86_64, GCC 13.1.0
 
 ---
 
@@ -222,9 +222,9 @@ All unit tests shall be implemented as automated tests in the chosen unit test f
 | 8 | Moving or speaking so slowly... | | |
 | 9 | Thoughts that you would be better off dead... | | |
 | Response options | Not at all / Several days / More than half the days / Nearly every day | | |
-| Functional item | Included and unscored | | |
+| Functional item | Omitted from research version — pending OIR-08 resolution | N/A | N/A |
 
-**Acceptance criterion:** All 9 items, functional item, and response options match DC-003 §2.2 exactly
+**Acceptance criterion:** All 9 scored items and response options match DC-003 §2.2 exactly. Functional item omitted per OIR-08.
 **Full text comparison:** Attach as CT-02-Evidence
 
 ---
@@ -243,9 +243,9 @@ All unit tests shall be implemented as automated tests in the chosen unit test f
 | 6 | Becoming easily annoyed or irritable | | |
 | 7 | Feeling afraid as if something awful might happen | | |
 | Response options | Not at all / Several days / More than half the days / Nearly every day | | |
-| Functional item | Included and unscored | | |
+| Functional item | Omitted from research version — pending OIR-08 resolution | N/A | N/A |
 
-**Acceptance criterion:** All 7 items, functional item, and response options match DC-003 §2.3 exactly
+**Acceptance criterion:** All 7 scored items and response options match DC-003 §2.3 exactly. Functional item omitted per OIR-08.
 **Full text comparison:** Attach as CT-03-Evidence
 
 ---
@@ -349,18 +349,20 @@ All unit tests shall be implemented as automated tests in the chosen unit test f
 
 | Test | Item 9 Response | Expected Behaviour | Pass/Fail | Date |
 |---|---|---|---|---|
-| FT-SAFE-01a | 0 (Not at all) | No crisis screen; results displayed directly | | |
-| FT-SAFE-01b | 1 (Several days) | Crisis screen displayed before results | | |
-| FT-SAFE-01c | 2 (More than half the days) | Crisis screen displayed before results | | |
-| FT-SAFE-01d | 3 (Nearly every day) | Crisis screen displayed before results | | |
+| FT-SAFE-01a | 0 (Not at all) | No crisis screen; results displayed directly | PASS | 2026-04-12 |
+| FT-SAFE-01b | 1 (Several days) | Crisis screen displayed before results | PASS | 2026-04-12 |
+| FT-SAFE-01c | 2 (More than half the days) | Crisis screen displayed before results | PASS | 2026-04-12 |
+| FT-SAFE-01d | 3 (Nearly every day) | Crisis screen displayed before results | PASS | 2026-04-12 |
+
+**Verification method:** Automated unit tests in tst_appstate (crisisTrigger_* test cases), Qt Test 6.8.3, 2026-04-12, Windows 11 x86_64.
 
 **Additional checks:**
-- [ ] Crisis screen content matches DC-003 §5.4 specification
-- [ ] Results screen is not accessible until crisis screen is displayed and acknowledged
-- [ ] Crisis screen displayed regardless of total PHQ-9 score
+- [ ] Crisis screen content matches DC-003 §5.4 specification — *pending UI implementation (Phase 4)*
+- [x] Results screen is not accessible until crisis screen is displayed and acknowledged — verified by tst_appstate::crisisGate_blocksResults
+- [x] Crisis screen displayed regardless of total PHQ-9 score — verified by tst_appstate::crisisTrigger_item9One_flagSet (score 1, MINIMAL)
 
 **Acceptance criterion:** 4/4 subtests pass; all additional checks confirmed. ZERO tolerance for failure.
-**Result:** [ ] All pass [ ] ANY FAILURE — do not release
+**Result:** [x] State machine logic: all pass. UI content check pending Phase 4.
 
 ---
 
@@ -372,10 +374,12 @@ All unit tests shall be implemented as automated tests in the chosen unit test f
 
 | Step | Action | Expected Result | Pass/Fail | Date |
 |---|---|---|---|---|
-| 1 | Trigger crisis screen (item 9 > 0) | Crisis screen displayed; results not visible | | |
-| 2 | Attempt to navigate to results without activating button | Navigation blocked | | |
-| 3 | Activate acknowledgement button | Results screen displayed | | |
-| 4 | Verify acknowledgement button text | *"I have read the above. Continue to my results."* | | |
+| 1 | Trigger crisis screen (item 9 > 0) | Crisis screen displayed; results not visible | PASS | 2026-04-12 |
+| 2 | Attempt to navigate to results without activating button | Navigation blocked | PASS | 2026-04-12 |
+| 3 | Activate acknowledgement button | Results screen displayed | PASS | 2026-04-12 |
+| 4 | Verify acknowledgement button text | *"I have read the above. Continue to my results."* | Pending UI | — |
+
+**Verification method (steps 1–3):** Automated unit tests in tst_appstate (crisisGate_blocksResults, crisisGate_acknowledgeReachesResults), Qt Test 6.8.3, 2026-04-12. Step 4 requires UI implementation (Phase 4).
 
 **Acceptance criterion:** All steps pass; results screen unreachable without acknowledgement. ZERO tolerance for failure.
 
@@ -388,10 +392,12 @@ All unit tests shall be implemented as automated tests in the chosen unit test f
 
 | Step | Action | Expected Result | Pass/Fail | Date |
 |---|---|---|---|---|
-| 1 | Load welcome screen | Age gate displayed; Begin button disabled | | |
-| 2 | Attempt to begin without activating gate | Begin button remains inactive | | |
-| 3 | Activate age acknowledgement | Begin button enabled | | |
-| 4 | Activate Begin button | ASRS introduction screen displayed | | |
+| 1 | Load welcome screen | Age gate displayed; Begin button disabled | Pending UI | — |
+| 2 | Attempt to begin without activating gate | Begin button remains inactive | PASS | 2026-04-12 |
+| 3 | Activate age acknowledgement | Begin button enabled | PASS | 2026-04-12 |
+| 4 | Activate Begin button | ASRS introduction screen displayed | PASS | 2026-04-12 |
+
+**Verification method (steps 2–4):** Automated unit tests in tst_appstate (ageGate_blocksAdvance, ageGate_acknowledgeTransitions), Qt Test 6.8.3, 2026-04-12. Step 1 (Begin button visual state) requires UI implementation (Phase 3).
 
 **Acceptance criterion:** All steps pass; assessment unreachable without age acknowledgement. ZERO tolerance for failure.
 

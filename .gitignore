@@ -1,0 +1,63 @@
+# ==============================================================================
+# ClarityCheck .gitignore
+# Configured for C++, Qt 6, CMake, and WebAssembly deployment
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Development Environment & IDEs
+# ------------------------------------------------------------------------------
+.claude/
+.qtcreator/
+*.user
+*.user.*
+CMakeLists.txt.user*
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ------------------------------------------------------------------------------
+# Build Intermediates & General Binaries
+# ------------------------------------------------------------------------------
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.ninja_deps
+*.ninja_log
+build.ninja
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+*.metatypes.json
+*autogen*
+Testing/
+
+# Desktop builds (never tracked)
+ClarityCheck-App/build/Desktop_*/
+
+# ------------------------------------------------------------------------------
+# WebAssembly Build Folder - Deploy ONLY production WASM binaries & web assets
+# ------------------------------------------------------------------------------
+# Ignore all build directories by default
+ClarityCheck-App/build/*
+
+# Do not ignore WebAssembly build folders themselves
+!ClarityCheck-App/build/WebAssembly_*/
+
+# Ignore build intermediates within WebAssembly directories
+ClarityCheck-App/build/WebAssembly_*/*
+
+# Whitelist the exact WebAssembly runtime and deployment files
+!ClarityCheck-App/build/WebAssembly_*/ClarityCheck.html
+!ClarityCheck-App/build/WebAssembly_*/ClarityCheck.js
+!ClarityCheck-App/build/WebAssembly_*/ClarityCheck.wasm
+!ClarityCheck-App/build/WebAssembly_*/qtloader.js
+!ClarityCheck-App/build/WebAssembly_*/qtlogo.svg

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClarityCheck — Research Prototype (WebAssembly Demo)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2A6EA6;
+      --primary-dark: #1E517B;
+      --primary-light: #E8F4FD;
+      --accent-danger: #C0392B;
+      --accent-warning: #D97706;
+      --warning-bg: #FFFBEB;
+      --warning-border: #FDE68A;
+      --danger-bg: #FEF2F2;
+      --danger-border: #FECACA;
+      --text-main: #1C1C1E;
+      --text-muted: #6B7280;
+      --bg-page: #F8FAFC;
+      --bg-card: #FFFFFF;
+      --border-color: #E2E8F0;
+      --radius: 12px;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Disclaimer Top Banner */
+    .banner-disclaimer {
+      background-color: var(--warning-bg);
+      border-bottom: 2px solid var(--warning-border);
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #92400E;
+      font-weight: 500;
+    }
+
+    .banner-disclaimer strong {
+      color: #78350F;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Crisis Top Strip */
+    .banner-crisis {
+      background-color: #1E293B;
+      color: #F8FAFC;
+      padding: 8px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    .banner-crisis a {
+      color: #93C5FD;
+      text-decoration: underline;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+
+    header {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-color);
+      padding: 24px 20px;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .logo-area h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tag-badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      background-color: #E0E7FF;
+      color: #3730A3;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .logo-area p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.15s ease-in-out;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #FFFFFF;
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border-color: var(--border-color);
+      color: var(--text-main);
+    }
+    .btn-outline:hover {
+      background-color: #F1F5F9;
+      border-color: #CBD5E1;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 32px auto;
+      padding: 0 20px;
+    }
+
+    .app-showcase-grid {
+      display: grid;
+      grid-template-columns: 500px 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .app-showcase-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Interactive Frame / App Viewport */
+    .app-frame-wrapper {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .frame-header {
+      background: #F8FAFC;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .frame-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .frame-title .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+    }
+
+    .frame-controls {
+      display: flex;
+      gap: 8px;
+    }
+
+    .frame-btn {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+    .frame-btn:hover {
+      background: #F1F5F9;
+    }
+
+    .frame-container {
+      width: 100%;
+      height: 800px;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .frame-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #FFFFFF;
+    }
+
+    /* Content Cards */
+    .info-section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p {
+      color: #374151;
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .instruments-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .instrument-item {
+      padding: 12px 16px;
+      background: #F8FAFC;
+      border-left: 4px solid var(--primary);
+      border-radius: 4px 8px 8px 4px;
+    }
+
+    .instrument-item h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
+
+    .instrument-item p {
+      font-size: 0.85rem;
+      color: #4B5563;
+      margin: 0;
+    }
+
+    .safety-highlight {
+      background-color: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 12px;
+    }
+    .safety-highlight h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #991B1B;
+      margin-bottom: 6px;
+    }
+    .safety-highlight p {
+      font-size: 0.88rem;
+      color: #7F1D1D;
+      margin-bottom: 8px;
+    }
+    .helpline-links {
+      font-size: 0.85rem;
+      color: #7F1D1D;
+      font-weight: 600;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .badge-blue { background: #DBEAFE; color: #1E40AF; }
+    .badge-green { background: #D1FAE5; color: #065F46; }
+    .badge-amber { background: #FEF3C7; color: #92400E; }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .spec-box {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      padding: 12px;
+      border-radius: 8px;
+    }
+    .spec-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+    .spec-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      background: #FFFFFF;
+      padding: 32px 20px;
+      margin-top: 60px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top SaMD Research Prototype Warning -->
+  <div class="banner-disclaimer">
+    <strong>⚠️ Research Prototype Notice:</strong> For investigational and evaluation purposes only. Not a medical device under EU MDR 2017/745. Does not provide medical diagnoses.
+  </div>
+
+  <!-- Persistent Crisis Notice -->
+  <div class="banner-crisis">
+    <span>Need immediate help? Free 24/7 crisis helplines:</span>
+    <strong>UK:</strong> 116 123 (Samaritans) |
+    <strong>US:</strong> 988 (Suicide & Crisis Lifeline) |
+    <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer">Worldwide Directory (findahelpline.com) &rarr;</a>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo-area">
+        <h1>ClarityCheck <span class="tag-badge">Research Prototype</span></h1>
+        <p>Self-administered ADHD, Depression, and Anxiety Assessment Battery (C++ / Qt Quick / WebAssembly)</p>
+      </div>
+      <div class="header-actions">
+        <a href="./ClarityCheck-App/build/WebAssembly_Qt_6_8_3_single_threaded-Release/ClarityCheck.html" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          Launch Full Screen &nearr;
+        </a>
+        <a href="https://github.com/mesw/ClarityCheckQt" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+          GitHub Repository &nearr;
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="app-showcase-grid">
+
+      <!-- Left Column: Embedded WebAssembly Application -->
+      <div class="app-frame-wrapper">
+        <div class="frame-header">
+          <div class="frame-title">
+            <span class="dot"></span>
+            <span>Qt 6.8.3 WebAssembly Engine</span>
+          </div>
+          <div class="frame-controls">
+            <button class="frame-btn" onclick="document.getElementById('wasm-frame').src=document.getElementById('wasm-frame').src">↺ Reload</button>
+            <a href="./ClarityCheck-App/build/WebAssembly_Qt_6_8_3_single_threaded-Release/ClarityCheck.html" class="frame-btn" target="_blank" rel="noopener noreferrer">⤢ Fullscreen</a>
+          </div>
+        </div>
+        <div class="frame-container">
+          <iframe 
+            id="wasm-frame" 
+            src="./ClarityCheck-App/build/WebAssembly_Qt_6_8_3_single_threaded-Release/ClarityCheck.html" 
+            title="ClarityCheck WebAssembly Application"
+            allow="fullscreen">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Right Column: Project Context, SaMD Disclaimers, Architecture -->
+      <div class="info-section">
+
+        <!-- About Card -->
+        <div class="card">
+          <h2>About ClarityCheck</h2>
+          <p>
+            <strong>ClarityCheck</strong> is an open-source, client-side digital screening tool designed to help adults (18+) who suspect they may have Attention-Deficit/Hyperactivity Disorder (ADHD) prepare for a structured clinical consultation.
+          </p>
+          <p>
+            The software administers a fixed battery of three clinically validated psychometric instruments, automatically calculates standardized scores, and provides plain-language interpretations to facilitate informed clinical discussions.
+          </p>
+
+          <ul class="instruments-list">
+            <li class="instrument-item">
+              <h3>1. ASRS v1.1 Part A (ADHD Screening)</h3>
+              <p>6-item symptom checklist developed with Harvard Medical School and WHO. Evaluates inattention and hyperactivity/impulsivity over the past 6 months against validated shaded-zone cut-offs (&ge;4 positive items).</p>
+            </li>
+            <li class="instrument-item">
+              <h3>2. PHQ-9 (Depression Screening)</h3>
+              <p>9-item validated assessment scoring depressive symptoms (0&ndash;27) over the past 2 weeks across standard clinical severity bands (Minimal, Mild, Moderate, Moderately Severe, Severe).</p>
+            </li>
+            <li class="instrument-item">
+              <h3>3. GAD-7 (Anxiety Screening)</h3>
+              <p>7-item assessment evaluating generalized anxiety symptoms (0&ndash;21) over the past 2 weeks across severity classifications.</p>
+            </li>
+          </ul>
+
+          <div class="safety-highlight">
+            <h3>Automated Crisis Safeguard Pathway (RC-09, RC-11)</h3>
+            <p>
+              In accordance with medical software safety specifications (IEC 62304 Class B), if a user indicates any self-harm ideation on PHQ-9 Item 9 (score &ge; 1), the application immediately activates a prioritized crisis intervention screen with verified helpline contacts before results can be accessed.
+            </p>
+          </div>
+        </div>
+
+        <!-- Privacy & Architecture -->
+        <div class="card">
+          <h2>Technical Architecture & Privacy by Design</h2>
+          <p>
+            ClarityCheck is engineered in <strong>C++17 and Qt Quick (QML)</strong>, compiled directly to <strong>WebAssembly (Wasm)</strong> for browser execution.
+          </p>
+          <div class="specs-grid">
+            <div class="spec-box">
+              <div class="spec-label">Execution Model</div>
+              <div class="spec-value">100% Client-Side</div>
+            </div>
+            <div class="spec-box">
+              <div class="spec-label">Data Privacy</div>
+              <div class="spec-value">Zero Server Telemetry</div>
+            </div>
+            <div class="spec-box">
+              <div class="spec-label">Target Architecture</div>
+              <div class="spec-value">Qt 6.8.3 Wasm (Single-Threaded)</div>
+            </div>
+            <div class="spec-box">
+              <div class="spec-label">IEC 62304 Safety Class</div>
+              <div class="spec-value">Class B (Planned MDR v1.0)</div>
+            </div>
+          </div>
+          <p style="margin-top: 14px; font-size: 0.88rem; color: #4B5563;">
+            🔒 <strong>Zero Data Transmission:</strong> No personal health data, responses, or scores leave your browser. Session data exists solely in transient browser memory and is discarded immediately when the tab is closed.
+          </p>
+        </div>
+
+        <!-- Regulatory & QMS Card -->
+        <div class="card">
+          <h2>Regulatory Status & Quality Documentation</h2>
+          <p>
+            This repository contains both the <strong>software implementation</strong> and complete <strong>Quality Management System (QMS)</strong> documentation structured under <strong>EU MDR 2017/745 (Class IIa SaMD)</strong> and <strong>ISO 13485:2016</strong>.
+          </p>
+          <p>
+            <em>Current Phase:</em> <strong>Research Prototype</strong>. The regulatory technical file, risk management file (ISO 14971), clinical evaluation (MEDDEV 2.7/1 rev 4), and usability engineering (IEC 62366-1) documentation are being drafted. Formal CE marking and clinical reviewer sign-off are required prior to commercial medical device release.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="https://github.com/mesw/ClarityCheckQt">GitHub Repository</a>
+      <a href="./ClarityCheck-App/build/WebAssembly_Qt_6_8_3_single_threaded-Release/ClarityCheck.html">Direct Wasm App</a>
+      <a href="https://github.com/mesw/ClarityCheckQt/blob/master/ClarityCheck-QMS/09-Labeling/LB-001-Instructions-for-Use.md">Instructions for Use (LB-001)</a>
+      <a href="https://github.com/mesw/ClarityCheckQt/blob/master/ClarityCheck-QMS/Open-Items-Register.md">Open Items Register</a>
+    </div>
+    <p>
+      &copy; 2026 ClarityCheck Project. Instruments copyright their respective owners (WHO, NYU, Harvard College, Pfizer Inc.).<br>
+      Developed for research and investigational evaluation. Not for commercial diagnosis or treatment decisions.
+    </p>
+  </footer>
+
+</body>
+</html>
